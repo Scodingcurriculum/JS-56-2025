@@ -1,0 +1,34 @@
+/* Simple Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: purple;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+}
+
+button {
+    background-color: orange;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: darkorange;
+}
+
+#greetingMessage {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
