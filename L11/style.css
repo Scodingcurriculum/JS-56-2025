@@ -1,0 +1,18 @@
+body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #equation {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 18px;
+            margin: 5px;
+        }
+        #feedback {
+            font-weight: bold;
+            margin-top: 20px;
+        }
