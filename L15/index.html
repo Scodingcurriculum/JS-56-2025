@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <!--Add this link for suncalc library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
+    </head>
+<body>
+    
+    <main>
+         <section id="location">
+             <h2>Enter City Name</h2>
+             <input type="text" id="city" placeholder="Enter city name">
+             <button onclick="geocodeAddress()">Get Coordinates</button>
+             <div id="results">
+             <p>Latitude: <span id="latitude"></span></p>
+             <p>Longitude: <span id="longitude"></span></p>
+             </div>
+        </section>
+          <!--Add this code in class 15-->
+       <section id="sunrise-sunset">
+             <h2>Sunrise & Sunset Tracker</h2>
+             <button onclick="getSunriseSunset()">Get Sunrise & Sunset, Moonrise and Moonset timings</button>
+             <div id="sunrise-sunset-results"></div>
+       </section>
+            
+  </main>
+    <footer>
+        <p>&copy; 2025 Cosmic Tracker</p>
+    </footer>
+    <script src="main.js"></script>
+
+ </body>
+</html>
