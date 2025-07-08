@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drag and Drop - Countries to Continents</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+    }
+    .drop-zone {
+      width: 200px;
+      height: 200px;
+      border: 2px dashed #00796b;
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .drop-zone h3 {
+      margin-bottom: 10px;
+      color: #00796b;
+    }
+    .country-list {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .country-list li {
+      padding: 8px 16px;
+      background-color: #00796b;
+      color: white;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-size: 14px;
+      width: auto;
+      min-width: 60px;
+      max-width: 100px;
+    }
+    .country-list li.dragging {
+      opacity: 0.5;
+    }
+    .drop-zone .active {
+      background-color: #e0f7fa;
+    }
+    #message {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #00796b;
+    }
+    .reset-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .reset-button button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Drag and Drop - Countries into Continents</h1>
+
+  <div class="container">
+    <div class="drop-zone" id="africa" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Africa</h3>
+    </div>
+    <div class="drop-zone" id="asia" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Asia</h3>
+    </div>
+    <div class="drop-zone" id="europe" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Europe</h3>
+    </div>
+  </div>
+
+  <ul class="country-list">
+    <li id="egypt" draggable="true" ondragstart="drag(event)">Egypt</li>
+    <li id="china" draggable="true" ondragstart="drag(event)">China</li>
+    <li id="germany" draggable="true" ondragstart="drag(event)">Germany</li>
+    <li id="kenya" draggable="true" ondragstart="drag(event)">Kenya</li>
+    <li id="india" draggable="true" ondragstart="drag(event)">India</li>
+    <li id="france" draggable="true" ondragstart="drag(event)">France</li>
+  </ul>
+
+  <div id="message">Drag countries into their correct continents.</div>
+
+  <div class="reset-button">
+    <button onclick="location.reload()">Reset Game</button>
+  </div>
+
+  <script>
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function allowDrop(event) {
+      event.preventDefault();
+      const dropZone = event.target.closest(".drop-zone");
+      if (dropZone) dropZone.classList.add('active');
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      let dropZone = event.target.closest(".drop-zone");
+      if (!dropZone) return;
+
+      const countryId = event.dataTransfer.getData("text");
+      const countryElement = document.getElementById(countryId);
+
+      if (!countryElement || countryElement.getAttribute("draggable") === "false") {
+        dropZone.classList.remove("active");
+        return;
+      }
+
+      // Check correctness
+      if (
+        (dropZone.id === "africa" && (countryId === "egypt" || countryId === "kenya")) ||
+        (dropZone.id === "asia" && (countryId === "china" || countryId === "india")) ||
+        (dropZone.id === "europe" && (countryId === "germany" || countryId === "france"))
+      ) {
+        dropZone.appendChild(countryElement);
+        countryElement.setAttribute("draggable", "false");
+        document.getElementById("message").textContent = "✅ Great job! Keep going.";
+        checkCompletion();
+      } else {
+        document.getElementById("message").textContent = "❌ Oops! Try again.";
+      }
+
+      dropZone.classList.remove('active');
+    }
+
+    function checkCompletion() {
+      const africa = document.getElementById("africa").querySelectorAll("li").length;
+      const asia = document.getElementById("asia").querySelectorAll("li").length;
+      const europe = document.getElementById("europe").querySelectorAll("li").length;
+
+      if (africa === 2 && asia === 2 && europe === 2) {
+        document.getElementById("message").textContent = "🎉 Excellent! All countries placed correctly!";
+      }
+    }
+  </script>
+
+</body>
+</html>
