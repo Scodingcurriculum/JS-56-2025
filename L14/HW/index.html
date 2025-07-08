@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenStreetMap Location Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f8ff;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e6f7ff;
+      border: 1px solid #b3e0ff;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🌍 Location Info from OpenStreetMap</h2>
+
+  <input type="text" id="placeInput" placeholder="Enter a city/state/country" />
+  <button onclick="getLocationDetails()">Search</button>
+
+  <div id="result"></div>
+
+  <script>
+    function getLocationDetails() {
+      const place = document.getElementById('placeInput').value.trim();
+      if (!place) {
+        alert("Please enter a place name.");
+        return;
+      }
+
+      const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=1&q=${encodeURIComponent(place)}`;
+
+      fetch(url, {
+        headers: {
+          'User-Agent': 'YourAppNameHere' // Required by Nominatim policy
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.length === 0) {
+          document.getElementById('result').innerHTML = `<strong>No results found for "${place}".</strong>`;
+          return;
+        }
+
+        const location = data[0];
+        const lat = location.lat;
+        const lon = location.lon;
+        const rank = location.importance;
+        const type = location.type;
+        const address = location.address;
+        const city = address.city || address.town || address.village || "N/A";
+        const state = address.state || "N/A";
+        const country = address.country || "N/A";
+
+        document.getElementById('result').innerHTML = `
+          <strong>📍 Place:</strong> ${place}<br>
+          <strong>Latitude:</strong> ${lat}<br>
+          <strong>Longitude:</strong> ${lon}<br>
+          <strong>Type of Address:</strong> ${type}<br>
+          <strong>Rank/Importance:</strong> ${rank}<br>
+          <strong>City:</strong> ${city}<br>
+          <strong>State:</strong> ${state}<br>
+          <strong>Country:</strong> ${country}
+        `;
+      })
+      .catch(error => {
+        console.error(error);
+        document.getElementById('result').innerHTML = `<strong>Error fetching data.</strong>`;
+      });
+    }
+  </script>
+
+</body>
+</html>
