@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Zone Drag & Drop Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      background: #eef6ff;
+      margin: 0;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #003366;
+    }
+    #game-area {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #cities, #timezones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .city, .zone {
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 2px solid #00509e;
+      min-width: 120px;
+      text-align: center;
+      cursor: grab;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .city:hover, .zone:hover {
+      background: #dbeeff;
+      transform: scale(1.05);
+    }
+    .zone {
+      background: #cce5ff;
+      min-height: 80px;
+      width: 150px;
+    }
+    #feedback {
+      text-align: center;
+      font-size: 18px;
+      margin: 10px;
+      color: #006400;
+      font-weight: bold;
+    }
+    #score {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff6600;
+      margin-bottom: 10px;
+    }
+    #play-again {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 25px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #play-again:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div id="game-area">
+  <h1>🌍 Match Cities to Their Time Zones 🌍</h1>
+  <div id="score">Score: 0 / 10</div>
+  <div id="feedback"></div>
+
+  <h2>Drag these cities:</h2>
+  <div id="cities"></div>
+
+  <h2>Drop them into the correct time zones:</h2>
+  <div id="timezones"></div>
+
+  <button id="play-again">🔁 Play Again</button>
+</div>
+
+<script>
+  const allCities = {
+    "Los Angeles": "UTC-8",
+    "Vancouver": "UTC-8",
+    "New York": "UTC-5",
+    "Toronto": "UTC-5",
+    "Lima": "UTC-5",
+    "London": "UTC+0",
+    "Accra": "UTC+0",
+    "Moscow": "UTC+3",
+    "Nairobi": "UTC+3",
+    "Tokyo": "UTC+9",
+    "Seoul": "UTC+9"
+  };
+
+  let shuffledCities = [];
+  let correctCount = 0;
+
+  const citiesContainer = document.getElementById('cities');
+  const timezonesContainer = document.getElementById('timezones');
+  const feedback = document.getElementById('feedback');
+  const scoreDisplay = document.getElementById('score');
+  const playAgainBtn = document.getElementById('play-again');
+
+  const zonesToShow = ["UTC-8", "UTC-5", "UTC+0", "UTC+3", "UTC+9"];
+
+  function shuffleAndSelect(obj, count) {
+    const keys = Object.keys(obj);
+    for (let i = keys.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [keys[i], keys[j]] = [keys[j], keys[i]];
+    }
+    return keys.slice(0, count);
+  }
+
+  function buildGame() {
+    citiesContainer.innerHTML = '';
+    timezonesContainer.innerHTML = '';
+    feedback.textContent = '';
+    correctCount = 0;
+    scoreDisplay.textContent = 'Score: 0 / 10';
+
+    shuffledCities = shuffleAndSelect(allCities, 10);
+
+    shuffledCities.forEach(city => {
+      const div = document.createElement('div');
+      div.className = 'city';
+      div.id = city;
+      div.textContent = city;
+      div.draggable = true;
+      div.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', city);
+      });
+      citiesContainer.appendChild(div);
+    });
+
+    zonesToShow.forEach(zone => {
+      const div = document.createElement('div');
+      div.className = 'zone';
+      div.dataset.timezone = zone;
+      div.textContent = zone;
+
+      div.addEventListener('dragover', e => e.preventDefault());
+
+      div.addEventListener('drop', e => {
+        e.preventDefault();
+        const cityName = e.dataTransfer.getData('text/plain');
+        const correctZone = allCities[cityName];
+        if (div.dataset.timezone === correctZone) {
+          const cityElement = document.getElementById(cityName);
+          div.appendChild(cityElement);
+          feedback.textContent = `✅ Great! ${cityName} belongs to ${correctZone}`;
+          correctCount++;
+          updateScore();
+        } else {
+          feedback.textContent = `❌ Oops! ${cityName} does not belong to ${div.dataset.timezone}`;
+        }
+      });
+
+      timezonesContainer.appendChild(div);
+    });
+  }
+
+  function updateScore() {
+    scoreDisplay.textContent = `Score: ${correctCount} / 10`;
+    if (correctCount === 10) {
+      feedback.textContent = "🎉 You matched all cities correctly!";
+    }
+  }
+
+  playAgainBtn.addEventListener('click', buildGame);
+
+  buildGame();
+</script>
+
+</body>
+</html>
