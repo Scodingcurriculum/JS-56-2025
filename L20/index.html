@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
+    </head>
+<body>
+    <header>
+        <h1><img src="planet.png" height="100px">  Cosmic Tracker  <img src="comet.png" height="100px"></h1>
+        <nav>
+            <ul>
+                <li><a href="#sunrise-sunset">Sunrise & Sunset Tracker</a></li>
+                <li><a href="#cosmic-events">Cosmic Event Calendar</a></li>
+                <li><a href="#age-on-planets">Age on other Planets</a></li>
+                <li><a href="#diary-entry">Daily Diary Entry</a></li>
+                <li><a href="#gaming-zone">Gaming Zone</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+         <section id="location">
+             <h2>Enter City Name</h2>
+             <input type="text" id="city" placeholder="Enter city name">
+             <button onclick="geocodeAddress()">Get Coordinates</button>
+             <div id="results">
+             <p>Latitude: <span id="latitude"></span></p>
+             <p>Longitude: <span id="longitude"></span></p>
+             </div>
+        </section>
+        
+       <section id="sunrise-sunset">
+             <h2>Sunrise & Sunset Tracker</h2>
+             <button onclick="getSunriseSunset()">Get Sunrise & Sunset, Moonrise and Moonset timings</button>
+             <div id="sunrise-sunset-results"></div>
+       </section>
+            
+            
+        <section id="cosmic-events">
+            <h2>Cosmic Event Calendar</h2>
+            <!-- Content goes here -->
+            <table>
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th colspan="4">Events</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>January</td>
+                    <td><a onclick="showDetails('quadrantids')">Quadrantids Meteor Shower</a></td>
+                    <td><a onclick="showDetails('moonOccultation')">Moon Occults Mars</a></td>
+                    <td><a onclick="showDetails('supermoon')">Supermoon</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>April</td>
+                    <td><a onclick="showDetails('solarEclipse')">Total Solar Eclipse</a></td>
+                    <td><a onclick="showDetails('venusJupiter')">Venus-Jupiter Conjunction</a></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>August</td>
+                    <td><a onclick="showDetails('perseid')">Perseid Meteor Shower</a></td>
+                    <td><a onclick="showDetails('blueMoon')">Blue Moon</a></td>
+                    <td><a onclick="showDetails('planetLineup')">Planetary Line-Up</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>December</td>
+                    <td><a onclick="showDetails('geminids')">Geminids Meteor Shower</a></td>
+                    <td><a onclick="showDetails('winterSolstice')">Winter Solstice</a></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            
+              <!-- Modal Popup -->
+              <div id="eventModal" class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick="closeModal()">&times;</span>
+                  <h3>Event Details</h3>
+                  <p id="modal-text"></p>
+                </div>
+              </div>
+        </section>
+       
+        <section id="age-on-planets">
+            <h2>How old are you on other planets? </h2>
+            <!-- Content goes here -->
+            <label>Enter your Birthdate:</label><br>
+            <input type="date" id="birthdate">
+            <button onclick="calculateAge()">Calculate</button>
+            <div id="output" style="margin-top: 20px;"></div>
+    
+
+        </section>
+
+  
+
+      <!--Add thi code in class 21-->  
+        <section id="gaming-zone">
+            <button onclick="window.open('game.html', '_blank')">
+                🎮 Play Time Zone Game
+              </button>
+        </section>
+       
+       
+        <h2>✨ Create Your Own Star Constellation</h2>
+  <button onclick="addStar()">Add a Star ⭐</button>
+  <div id="constellationArea"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cosmic Tracker</p>
+    </footer>
+    <script src="main.js"></script>
+
+ </body>
+</html>
