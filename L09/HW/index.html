@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>JS_GR56_HW_09</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List Organizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Shopping List Organizer</h1>
+    
+    <label for="item">Enter an item:</label>
+    <input type="text" id="item" placeholder="Item name">
+    
+    <button onclick="addItem('start')">Add to Start</button>
+    <button onclick="addItem('end')">Add to End</button>
+    <button onclick="removeItem('start')">Remove from Start</button>
+    <button onclick="removeItem('end')">Remove from End</button>
+    
+    <h2>Shopping List:</h2>
+    <div id="list">
+        <ul id="listItems">
+            <!-- The shopping list items will be displayed here -->
+        </ul>
+    </div>
+    
+    <h2>List Details:</h2>
+    <p>Total number of items: <span id="itemCount">0</span></p>
+    <p>First item: <span id="firstItem">None</span></p>
+    <p>Last item: <span id="lastItem">None</span></p>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
