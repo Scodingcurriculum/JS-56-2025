@@ -1,0 +1,19 @@
+body{
+  padding-top:25px;
+  background-color:#455A64;
+}
+div{
+  margin:20px auto;
+  background-color:#90A4AE;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  width:60%;
+  font-size:20px;
+}
+button{
+  border:none;
+  padding:5px;
+  background-color:#F9A825;
+  color:white;
+  }
