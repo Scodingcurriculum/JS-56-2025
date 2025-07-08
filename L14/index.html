@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Tracker</title>
+    <link rel="stylesheet" href="style.css">
+ </head>
+<body>
+   <!--Add this code to the last class:  section id= location.-->
+    <main>
+         <section id="location">
+             <h2>Enter City Name</h2>
+             <input type="text" id="city" placeholder="Enter city name">
+             <button onclick="geocodeAddress()">Get Coordinates</button>
+             <div id="results">
+             <p>Latitude: <span id="latitude"></span></p>
+             <p>Longitude: <span id="longitude"></span></p>
+             </div>
+        </section>
+        
+              
+  
+    </main>
+    <footer>
+        <p>&copy; 2025 Cosmic Tracker</p>
+    </footer>
+    <script src="main.js"></script>
+
+ </body>
+</html>
