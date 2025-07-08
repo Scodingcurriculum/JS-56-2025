@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop - Countries to Continents</title>
+</head>
+<body>
+  <h1>Drag and Drop - Countries into Continents</h1>
+  <div class="container">
+    <div class="drop-zone" id="africa" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Africa</h3>
+    </div>
+    <div class="drop-zone" id="asia" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Asia</h3>
+    </div>
+    <div class="drop-zone" id="europe" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h3>Europe</h3>
+    </div>
+  </div>
+
+  <ul class="country-list">
+    <li id="egypt" draggable="true" ondragstart="drag(event)">Egypt</li>
+    <li id="china" draggable="true" ondragstart="drag(event)">China</li>
+    <li id="germany" draggable="true" ondragstart="drag(event)">Germany</li>
+    <li id="kenya" draggable="true" ondragstart="drag(event)">Kenya</li>
+    <li id="india" draggable="true" ondragstart="drag(event)">India</li>
+    <li id="france" draggable="true" ondragstart="drag(event)">France</li>
+  </ul>
+
+  <div id="message">Drag countries into their correct continents.</div>
+
+  <div class="reset-button">
+    <button onclick="location.reload()">Reset Game</button>
+  </div>
+ 
+</body>
+</html>
