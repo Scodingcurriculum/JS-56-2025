@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Planet Details Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: auto;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #444;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Planets Table</h2>
+  <table id="planetTable">
+    <thead>
+      <tr>
+        <th>Planet Name</th>
+        <th>Click for Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr onclick="showDetails('Mercury')">
+        <td>Mercury</td>
+        <td>View</td>
+      </tr>
+      <tr onclick="showDetails('Venus')">
+        <td>Venus</td>
+        <td>View</td>
+      </tr>
+      <tr onclick="showDetails('Earth')">
+        <td>Earth</td>
+        <td>View</td>
+      </tr>
+      <tr onclick="showDetails('Mars')">
+        <td>Mars</td>
+        <td>View</td>
+      </tr>
+    </tbody>
+  </table>
+
+   </body>
+</html>
