@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sunrise & Sunset Finder</title>
+  <!-- SunCalc -->
+  <script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
+  <!-- Luxon -->
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <!-- TimeZone Finder -->
+  <script src="https://unpkg.com/@photostructure/tz-lookup@6.1.26/dist/tz-lookup.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 8px;
+    }
+    #result {
+      margin-top: 20px;
+      background: #e0f7fa;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🌍 Sunrise & Sunset Finder</h2>
+  <input type="text" id="place" placeholder="Enter a place (e.g., Tokyo)">
+  <button onclick="findDetails()">Find</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function findDetails() {
+      const place = document.getElementById("place").value;
+      if (!place) {
+        alert("Please enter a place.");
+        return;
+      }
+
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.length === 0) {
+          document.getElementById("result").innerHTML = "Place not found.";
+          return;
+        }
+
+        const loc = data[0];
+        const lat = parseFloat(loc.lat);
+        const lon = parseFloat(loc.lon);
+        const address = loc.display_name;
+        const rank = loc.importance || "N/A";
+        const type = loc.type;
+
+        // Try to extract city, state, country from 'address' (reverse geocode format)
+        const detailsURL = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+        const detailsResponse = await fetch(detailsURL);
+        const details = await detailsResponse.json();
+        const addressParts = details.address;
+
+        const city = addressParts.city || addressParts.town || addressParts.village || "N/A";
+        const state = addressParts.state || "N/A";
+        const country = addressParts.country || "N/A";
+
+        // Get timezone from tz-lookup
+        const timeZone = window.tzlookup(lat, lon);
+
+        // Get sunrise and sunset using SunCalc
+        const sunTimes = SunCalc.getTimes(new Date(), lat, lon);
+        const { DateTime } = luxon;
+
+        const sunrise = DateTime.fromJSDate(sunTimes.sunrise).setZone(timeZone).toLocaleString(DateTime.TIME_WITH_SECONDS);
+        const sunset = DateTime.fromJSDate(sunTimes.sunset).setZone(timeZone).toLocaleString(DateTime.TIME_WITH_SECONDS);
+
+        document.getElementById("result").innerHTML = `
+          <strong>🔍 Place:</strong> ${place}<br>
+          <strong>📌 Location:</strong> ${address}<br>
+          <strong>📍 Latitude:</strong> ${lat}<br>
+          <strong>📍 Longitude:</strong> ${lon}<br>
+          <strong>🏷️ Type:</strong> ${type}<br>
+          <strong>⭐ Rank:</strong> ${rank}<br>
+          <strong>🏙️ City:</strong> ${city}<br>
+          <strong>🌆 State:</strong> ${state}<br>
+          <strong>🌎 Country:</strong> ${country}<br>
+          <strong>🕓 Timezone:</strong> ${timeZone}<br><br>
+          <strong>🌅 Sunrise:</strong> ${sunrise}<br>
+          <strong>🌇 Sunset:</strong> ${sunset}
+        `;
+      } catch (err) {
+        document.getElementById("result").innerHTML = "Something went wrong: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
