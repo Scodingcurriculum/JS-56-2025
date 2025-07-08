@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Your Own Planet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    .planet-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 10px auto;
+      border: 2px solid #000;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e6ffe6;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create Your Own Planet 🌍</h1>
+
+  <label>Planet Name:</label><br>
+  <input type="text" id="planetName"><br><br>
+
+  <label>Planet Color:</label><br>
+  <input type="color" id="planetColor"><br><br>
+
+  <label>Year Span (in Earth years):</label><br>
+  <input type="number" id="yearSpan" min="1"><br><br>
+
+  <label>Names of People (Aliens) [comma-separated]:</label><br>
+  <input type="text" id="alienNames" placeholder="Zorg, Blip, Xenu"><br><br>
+
+  <button onclick="createPlanet()">Create Planet</button>
+
+  <div id="result"></div>
+
+  <script>
+    function createPlanet() {
+      const name = document.getElementById('planetName').value;
+      const color = document.getElementById('planetColor').value;
+      const yearSpan = document.getElementById('yearSpan').value;
+      const aliens = document.getElementById('alienNames').value.split(',').map(a => a.trim());
+
+      const planetHTML = `
+        <h2>🌌 Welcome to Planet ${name}!</h2>
+        <div class="planet-preview" style="background-color: ${color};"></div>
+        <p><strong>Year Span:</strong> ${yearSpan} Earth years</p>
+        <p><strong>People on ${name}:</strong></p>
+        <ul>${aliens.map(a => `<li>${a}</li>`).join('')}</ul>
+      `;
+
+      document.getElementById('result').innerHTML = planetHTML;
+    }
+  </script>
+</body>
+</html>
