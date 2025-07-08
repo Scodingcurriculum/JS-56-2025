@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>JS_GR56_P03</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+  <h1>SONAR Distance Calculator</h1>
+  <p>Calculate the distance of an underwater object using SONAR. </p>
+    <!--Additional Activity - decomment this for the additional activity
+By default medium is water-->
+  <label for="medium">Select Medium:</label>
+  <select id="medium"> 
+    <option value="0.932">Water (0.932 mi/s)</option>
+    <option value="0.213">Air (0.213 mi/s)</option>
+    <option value="3.705">Steel (3.705 mi/s)</option>
+  </select>
+  <br>
+  <label for="time">Enter time (seconds):</label>
+  <input type="number" id="time" placeholder="Time in seconds" min="0" />
+  <button onclick="calculateDistance()">Calculate Distance</button>
+  <div class="output" id="result"></div>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
