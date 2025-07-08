@@ -1,0 +1,17 @@
+body{
+  background-color:#F0F4C3;
+}
+div{
+  background-color:white;
+  margin:20px;
+  padding:30px;
+  width:50%;
+  text-align:left;
+  border-radius:20px;
+}
+button{
+  background-color:#5C6BC0;
+  border:0px;
+  padding:10px;
+  color:white;
+}
