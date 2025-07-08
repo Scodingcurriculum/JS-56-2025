@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constellation Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .quiz-container {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 2em;
+      color: #ffcc00;
+    }
+    img {
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .options {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    .options li {
+      background-color: #ffcc00;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .options li:hover {
+      background-color: #ff9933;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <h1>Constellation Quiz</h1>
+    <p>Identify the constellation shown in the image.</p>
+    <img id="constellation-image" src="https://www.planetguide.net/wp-content/uploads/2020/06/orion-constellation.webp" alt="Constellation Image">
+    
+    <ul class="options">
+      <li onclick="checkAnswer('Orion')">Orion</li>
+      <li onclick="checkAnswer('Ursa Major')">Ursa Major</li>
+      <li onclick="checkAnswer('Scorpius')">Scorpius</li>
+      <li onclick="checkAnswer('Leo')">Leo</li>
+    </ul>
+    
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Define the correct answer for the current constellation
+    const correctAnswer = 'Orion';  // The answer for the displayed constellation
+
+    // Function to check the user's answer
+    function checkAnswer(selected) {
+      const result = document.getElementById('result');
+      if (selected === correctAnswer) {
+        result.textContent = 'Correct! You identified the ' + correctAnswer + ' constellation.';
+        result.style.color = 'green';
+      } else {
+        result.textContent = 'Oops! That\'s incorrect. Try again!';
+        result.style.color = 'red';
+      }
+    }
+  </script>
+
+</body>
+</html>
