@@ -1,0 +1,187 @@
+/* General Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(to top, #0b0c10, #1f2833);
+    color: #c5c6c7;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+header {
+    background: #45a29e;
+    color: #0b0c10;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px #66fcf1;
+}
+
+header h1 {
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+nav a {
+    color: #0b0c10;
+    background: #66fcf1;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+nav a:hover {
+    background: #1f2833;
+    color: #66fcf1;
+    border: 1px solid #66fcf1;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+section {
+    background: #1f2833;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #0b0c10;
+}
+
+section h2 {
+    color: #66fcf1;
+    margin-bottom: 10px;
+}
+
+input, textarea, button {
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 500px;
+}
+
+button {
+    background-color: #45a29e;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom:10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #66fcf1;
+    color: #0b0c10;
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #66fcf1;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #45a29e;
+    color: #0b0c10;
+}
+
+td a {
+    color: #66fcf1;
+    cursor: pointer;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background: #1f2833;
+    color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 500px;
+    margin: 100px auto;
+    position: relative;
+    box-shadow: 0 0 15px #66fcf1;
+}
+
+.close {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 1.5em;
+    color: #66fcf1;
+    cursor: pointer;
+}
+
+/* Constellation Area */
+#constellationArea {
+    margin-top: 20px;
+    background: #0b0c10;
+    border: 2px dashed #66fcf1;
+    height: 400px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    cursor: grab;
+    box-shadow: 0 0 10px #fff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #c5c6c7;
+    border-top: 2px solid #66fcf1;
+}
